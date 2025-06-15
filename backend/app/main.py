@@ -1,8 +1,9 @@
 import logging
+import logging
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import health
+from .routers import health, bias_detection, auth_router # Added auth_router
 
 # Configure logging
 logging.basicConfig(
@@ -57,7 +58,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(health.router, prefix="/api")
+app.include_router(health.router, prefix="/api", tags=["Health"])
+app.include_router(bias_detection.router, prefix="/api/bias", tags=["Bias Detection"])
+app.include_router(auth_router.router, prefix="/api/auth", tags=["Authentication"]) # Added auth router
 
 @app.get("/")
 async def root():

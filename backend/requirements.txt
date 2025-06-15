@@ -3,3 +3,9 @@ uvicorn[standard]
 python-dotenv
 httpx
 pytest
+pandas
+python-jose[cryptography]
+passlib[bcrypt]
+aif360
+scipy
+reportlab
